@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b18" />
+  <meta name="description" content="DoN × Alien — September 2019 → ∞" />
+  <title>DoN × Alien — 2019 → ∞</title>
+
+  <style>
+    /* ============================================================
+       
+       ============================================================ */
+
+    :root {
+      --bg: #070914;
+      --bg-soft: #0d1020;
+      --panel: rgba(20, 22, 39, .72);
+      --panel-strong: rgba(24, 25, 43, .9);
+      --cream: #f7efe5;
+      --muted: #b8b0b2;
+      --rose: #c88491;
+      --burgundy: #6e2d3d;
+      --gold: #d8b878;
+      --pink: #e8b6c0;
+      --line: rgba(247, 239, 229, .14);
+      --shadow: 0 24px 70px rgba(0,0,0,.36);
+      --radius: 24px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --devanagari: "Noto Sans Devanagari", "Nirmala UI", Mangal, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--bg);
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(110,45,61,.18), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(216,184,120,.08), transparent 26%),
+        linear-gradient(180deg, #070914 0%, #0a0c19 45%, #080912 100%);
+      color: var(--cream);
+      font-family: var(--sans);
+      overflow-x: hidden;
+    }
+
+    body.locked { overflow: hidden; }
+
+    button, input { font: inherit; }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    a { color: inherit; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: .035;
+      background-image:
+        repeating-radial-gradient(circle at 0 0, #fff 0 1px, transparent 1px 4px);
+      background-size: 8px 8px;
+      mix-blend-mode: soft-light;
+    }
+
+    .stars, .stars::before, .stars::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+    }
+
+    .stars {
+      z-index: 0;
+      opacity: .55;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.65) 0 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(232,182,192,.42) 0 1px, transparent 1.5px);
+      background-size: 110px 110px, 170px 170px;
+      background-position: 0 0, 45px 70px;
+      animation: drift 28s linear infinite;
+    }
+
+    .stars::before {
+      opacity: .35;
+      background-image: radial-gradient(circle, rgba(255,255,255,.5) 0 1px, transparent 1.5px);
+      background-size: 230px 230px;
+      animation: drift 42s linear reverse infinite;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(0,0,0); }
+      to { transform: translate3d(-90px,50px,0); }
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 110;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--rose), var(--gold));
+      box-shadow: 0 0 18px rgba(216,184,120,.45);
+    }
+
+    .music-control {
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 120;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(12,14,27,.84);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      display: grid;
+      place-items: center;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .music-control:hover { transform: translateY(-2px); }
+    .music-control.playing { background: rgba(110,45,61,.85); }
+
+    .section {
+      position: relative;
+      z-index: 2;
+      min-height: 100svh;
+      display: grid;
+      align-items: center;
+      padding: 84px 20px;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: .76rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.05;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: clamp(2.35rem, 8vw, 5.7rem);
+      max-width: 900px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1rem;
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 3vw, 1.35rem);
+      max-width: 680px;
+    }
+
+    .small { font-size: .88rem; color: var(--muted); }
+
+    .center { text-align: center; }
+    .center .lead { margin-left: auto; margin-right: auto; }
+
+    .btn {
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(247,239,229,.18);
+      background: rgba(247,239,229,.07);
+      color: var(--cream);
+      transition: transform .25s ease, background .25s ease, border-color .25s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: rgba(247,239,229,.12);
+      border-color: rgba(216,184,120,.4);
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #7c3447, #9a5061);
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 14px 35px rgba(110,45,61,.3);
+    }
+
+    .btn.primary:hover { background: linear-gradient(135deg, #8b3b50, #aa596b); }
+
+    .opening {
+      min-height: 100svh;
+      text-align: center;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(200,132,145,.15), transparent 24%),
+        radial-gradient(circle at 50% 70%, rgba(216,184,120,.06), transparent 28%);
+    }
+
+    .opening-inner { max-width: 760px; }
+
+    .alien-orb {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 22px;
+      border: 1px solid rgba(216,184,120,.3);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 2.4rem;
+      background: radial-gradient(circle, rgba(200,132,145,.16), rgba(255,255,255,.02));
+      box-shadow: 0 0 70px rgba(200,132,145,.14);
+      animation: float 5s ease-in-out infinite;
+      cursor: pointer;
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .opening h1 {
+      font-size: clamp(3.5rem, 14vw, 8.8rem);
+      letter-spacing: -.055em;
+    }
+
+    .opening .date {
+      margin: 18px 0 12px;
+      color: var(--gold);
+      font-size: .88rem;
+      letter-spacing: .25em;
+    }
+
+    .opening .hint {
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 28px;
+    }
+
+    .scroll-cue {
+      margin-top: 50px;
+      color: rgba(247,239,229,.45);
+      font-size: .78rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      animation: breathe 2.2s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      50% { opacity: .45; transform: translateY(4px); }
+    }
+
+    .chapter {
+      position: relative;
+    }
+
+    .chapter::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 1px;
+      height: 90px;
+      background: linear-gradient(transparent, rgba(216,184,120,.25));
+    }
+
+    .story-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .timeline {
+      position: relative;
+      margin-top: 45px;
+      padding-left: 24px;
+      border-left: 1px solid rgba(216,184,120,.25);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 0 0 42px 22px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -29px;
+      top: 5px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--rose);
+      box-shadow: 0 0 0 6px rgba(200,132,145,.08), 0 0 20px rgba(200,132,145,.4);
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item h3 {
+      font-size: clamp(1.65rem, 5vw, 2.8rem);
+      margin-bottom: 9px;
+    }
+
+    .bus-scene {
+      margin-top: 38px;
+      min-height: 340px;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(30,34,57,.55), rgba(10,12,23,.92)),
+        radial-gradient(circle at 80% 35%, rgba(216,184,120,.16), transparent 22%);
+    }
+
+    .bus-road {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 64px;
+      height: 1px;
+      background: rgba(247,239,229,.18);
+    }
+
+    .bus-stop {
+      position: absolute;
+      right: 10%;
+      bottom: 65px;
+      width: 3px;
+      height: 75px;
+      background: rgba(247,239,229,.35);
+    }
+
+    .bus-stop::after {
+      content: "Cycle चोक ";
+      position: absolute;
+      top: -14px;
+      left: -22px;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      color: rgba(247,239,229,.45);
+    }
+
+    .bus {
+      position: absolute;
+      left: -180px;
+      bottom: 66px;
+      width: 145px;
+      height: 72px;
+      border-radius: 15px 15px 8px 8px;
+      background: linear-gradient(180deg, #c88491, #6e2d3d);
+      border: 1px solid rgba(255,255,255,.2);
+      box-shadow: 0 15px 30px rgba(0,0,0,.3);
+      animation: busRide 7s ease-in-out infinite;
+    }
+
+    .bus::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 12px;
+      width: 70px;
+      height: 25px;
+      border-radius: 5px;
+      background: rgba(8,10,20,.72);
+      box-shadow: 78px 0 0 -1px rgba(8,10,20,.72);
+    }
+
+    .bus::after {
+      content: "🚌";
+      position: absolute;
+      right: -2px;
+      top: -19px;
+      font-size: 1.2rem;
+    }
+
+    .wheel {
+      position: absolute;
+      bottom: -8px;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: #090b14;
+      border: 3px solid #4b4b59;
+    }
+
+    .wheel.one { left: 20px; }
+    .wheel.two { right: 20px; }
+
+    @keyframes busRide {
+      0% { transform: translateX(0); }
+      40%, 60% { transform: translateX(54vw); }
+      100% { transform: translateX(110vw); }
+    }
+
+    .walkers {
+      position: absolute;
+      left: 42%;
+      bottom: 70px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-end;
+      opacity: .9;
+    }
+
+    .person {
+      font-size: 2rem;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.25));
+    }
+
+    .scene-copy {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      top: 26px;
+      text-align: center;
+    }
+
+    .scene-line {
+      min-height: 38px;
+      font-family: var(--serif);
+      font-size: clamp(1.5rem, 5vw, 2.6rem);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .scene-line.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .catch-line {
+      margin-top: 10px;
+      color: var(--gold);
+      font-size: .92rem;
+    }
+
+    .kiss-card {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1fr;
+      margin-top: 38px;
+    }
+
+    .kiss-icons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      font-size: clamp(2.6rem, 11vw, 4.8rem);
+    }
+
+    .icon-pill {
+      display: grid;
+      place-items: center;
+      min-width: 82px;
+      min-height: 82px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.045);
+    }
+
+    .debate {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .choice {
+      min-height: 150px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,.045);
+      transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 18px;
+    }
+
+    .choice:hover {
+      transform: translateY(-4px);
+      border-color: rgba(216,184,120,.35);
+    }
+
+    .choice .big { font-size: 3rem; display: block; margin-bottom: 8px; }
+    .choice .who { color: var(--muted); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+
+    .debate-result {
+      min-height: 32px;
+      text-align: center;
+      margin-top: 18px;
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 1.3rem;
+    }
+
+    .flower-stage {
+      position: relative;
+      margin-top: 32px;
+      min-height: 360px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 50% 105%, rgba(62,78,53,.28), transparent 46%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    }
+
+    .flower {
+      position: absolute;
+      bottom: 15px;
+      transform-origin: bottom center;
+      animation: bloom .55s ease both;
+      user-select: none;
+      font-size: clamp(1.7rem, 6vw, 3rem);
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.2));
+    }
+
+    @keyframes bloom {
+      from { transform: scale(.2) rotate(-12deg); opacity: 0; }
+      to { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    .flower-controls { text-align: center; margin-top: 18px; }
+
+    .reveal-note {
+      min-height: 96px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      margin-top: 20px;
+      color: var(--cream);
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 4vw, 2rem);
+    }
+
+    .pokhara {
+      background:
+        radial-gradient(circle at 50% 40%, rgba(216,184,120,.11), transparent 30%),
+        linear-gradient(180deg, #0c1020 0%, #0a1020 52%, #101722 100%);
+    }
+
+    .mountains {
+      position: absolute;
+      inset: auto 0 0;
+      height: 46%;
+      opacity: .75;
+      background:
+        linear-gradient(135deg, transparent 45%, rgba(247,239,229,.08) 46% 49%, transparent 50%) 0 20%/35% 100%,
+        linear-gradient(45deg, transparent 45%, rgba(247,239,229,.06) 46% 50%, transparent 51%) 20% 0/42% 100%;
+      clip-path: polygon(0 65%, 12% 48%, 22% 62%, 34% 28%, 46% 58%, 59% 37%, 71% 63%, 82% 43%, 100% 66%, 100% 100%, 0 100%);
+    }
+
+    .lake {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 27%;
+      background: linear-gradient(180deg, rgba(102,131,151,.11), rgba(247,239,229,.025));
+      border-top: 1px solid rgba(216,184,120,.12);
+    }
+
+
+    .polaroid .photo {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #eee;
+}
+
+.polaroid .photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.lightbox-photo {
+  width: 100%;
+  max-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-photo img {
+  max-width: 100%;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+    .photo-placeholder {
+      min-height: 260px;
+      border: 1px dashed rgba(216,184,120,.32);
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      color: rgba(247,239,229,.65);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.045), rgba(255,255,255,.015)),
+        repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,.018) 14px 15px);
+    }
+
+    .photo-placeholder strong {
+      display: block;
+      color: var(--cream);
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      margin-bottom: 7px;
+    }
+
+    .travel-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .travel-box {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .travel-box .emoji { font-size: 2rem; }
+    .travel-box strong { display: block; margin-top: 8px; }
+    .travel-box span { color: var(--muted); font-size: .9rem; }
+
+    .gallery {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+      align-items: start;
+    }
+
+    .polaroid {
+      padding: 9px 9px 15px;
+      background: #eee4d8;
+      color: #25232a;
+      box-shadow: 0 18px 35px rgba(0,0,0,.28);
+      transform: rotate(var(--rot));
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .polaroid:hover, .polaroid:focus-visible {
+      transform: rotate(0) translateY(-6px) scale(1.02);
+      box-shadow: 0 26px 50px rgba(0,0,0,.35);
+      outline: none;
+    }
+
+    .polaroid:nth-child(3n) { grid-row: span 2; }
+    .polaroid .photo-placeholder {
+      min-height: 155px;
+      border: 1px solid rgba(30,25,30,.12);
+      color: #6e6365;
+      background: #ddd1c6;
+      border-radius: 2px;
+      padding: 10px;
+    }
+
+    .polaroid .photo-placeholder strong {
+      color: #312b2e;
+      font-size: 1.05rem;
+    }
+
+    .caption {
+      padding: 10px 5px 0;
+      font-family: var(--serif);
+      font-size: .98rem;
+    }
+
+    .gallery-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .distance {
+      background:
+        radial-gradient(circle at 50% 40%, rgba(200,132,145,.07), transparent 28%),
+        linear-gradient(180deg, #080a14, #0b0e1b);
+    }
+
+    .mapline {
+      position: relative;
+      min-height: 340px;
+      margin-top: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 18% 46%, rgba(216,184,120,.12), transparent 15%),
+        radial-gradient(circle at 82% 54%, rgba(200,132,145,.13), transparent 15%),
+        rgba(255,255,255,.025);
+      overflow: hidden;
+    }
+
+    .country {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: grid;
+      place-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    .country.nepal { left: 9%; }
+    .country.canada { right: 9%; }
+
+    .country .flag { font-size: 2.6rem; }
+    .country strong { font-family: var(--serif); font-size: 1.4rem; }
+
+    .route {
+      position: absolute;
+      left: 24%;
+      right: 24%;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--rose), transparent);
+      box-shadow: 0 0 18px rgba(216,184,120,.3);
+    }
+
+    .route::after {
+      content: "✦";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      color: var(--gold);
+      background: #0b0d19;
+      padding: 8px;
+    }
+
+    .route-dot {
+      position: absolute;
+      top: calc(50% - 5px);
+      left: 25%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cream);
+      box-shadow: 0 0 20px rgba(247,239,229,.6);
+      animation: travel 4.5s ease-in-out infinite;
+    }
+
+    @keyframes travel {
+      0%, 100% { left: 25%; opacity: .55; }
+      50% { left: 74%; opacity: 1; }
+    }
+
+    .distance-copy {
+      margin-top: 38px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .distance-line {
+      padding: 20px;
+      border-left: 1px solid rgba(216,184,120,.25);
+      background: linear-gradient(90deg, rgba(255,255,255,.035), transparent);
+    }
+
+    .distance-line strong {
+      display: block;
+      color: var(--cream);
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      font-weight: 400;
+    }
+
+    .nepali {
+      font-family: var(--devanagari);
+      color: var(--pink);
+    }
+
+    .letter-wrap {
+      max-width: 820px;
+      margin: 42px auto 0;
+    }
+
+    .letter {
+      position: relative;
+      padding: 30px 24px;
+      border: 1px solid rgba(216,184,120,.22);
+      border-radius: 4px;
+      background:
+        linear-gradient(rgba(255,247,235,.92), rgba(246,235,217,.95)),
+        #f4eadb;
+      color: #30272b;
+      box-shadow: 0 30px 80px rgba(0,0,0,.32);
+      transform: rotate(-.25deg);
+    }
+
+    .letter::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 1px solid rgba(110,45,61,.16);
+      pointer-events: none;
+    }
+
+    .letter p {
+      color: #50464a;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.04rem;
+      line-height: 1.95;
+      margin: 0 0 18px;
+      position: relative;
+    }
+
+    .letter .sign {
+      margin-top: 28px;
+      font-size: 1.25rem;
+      color: #6e2d3d;
+    }
+
+    .last-thing {
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(200,132,145,.11), transparent 24%),
+        #080a15;
+    }
+
+    .last-thing .tiny {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .final-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      display: grid;
+      place-items: center;
+      background: rgba(3,4,10,.97);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1s ease, visibility 1s ease;
+      padding: 24px;
+    }
+
+    .final-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .final-content {
+      width: min(800px, 100%);
+      text-align: center;
+    }
+
+    .final-line {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 1s ease, transform 1s ease;
+      margin: 0 0 18px;
+      font-family: var(--serif);
+      font-size: clamp(1.45rem, 5vw, 2.5rem);
+      color: var(--cream);
+    }
+
+    .final-line.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .final-line.big {
+      font-size: clamp(3rem, 13vw, 7.6rem);
+      color: var(--pink);
+      letter-spacing: -.04em;
+      margin: 35px 0;
+    }
+
+    .final-infinity {
+      opacity: 0;
+      transform: scale(.92);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 8vw, 4.5rem);
+      color: var(--gold);
+    }
+
+    .final-infinity.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .final-sign {
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      margin-top: 22px;
+      color: var(--muted);
+    }
+
+    .final-sign.show { opacity: 1; }
+
+    .close-final {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: rgba(2,3,9,.92);
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .35s ease, visibility .35s ease;
+    }
+
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-card {
+      width: min(720px, 100%);
+      max-height: 90vh;
+      border-radius: 20px;
+      padding: 12px;
+      background: #efe5d8;
+      color: #2e292c;
+      box-shadow: 0 35px 90px rgba(0,0,0,.5);
+      transform: scale(.96);
+      transition: transform .35s ease;
+    }
+
+    .lightbox.active .lightbox-card { transform: scale(1); }
+
+    .lightbox-card .photo-placeholder {
+      min-height: min(65vh, 500px);
+      border-color: rgba(46,41,44,.15);
+      background: #ddd0c2;
+      color: #6e6365;
+    }
+
+    .lightbox-caption {
+      padding: 12px 8px 5px;
+      font-family: var(--serif);
+      font-size: 1.15rem;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 76px;
+      z-index: 400;
+      transform: translate(-50%, 20px);
+      opacity: 0;
+      pointer-events: none;
+      max-width: min(90vw, 480px);
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(10,12,23,.92);
+      backdrop-filter: blur(12px);
+      text-align: center;
+      color: var(--cream);
+      box-shadow: var(--shadow);
+      transition: opacity .3s ease, transform .3s ease;
+      font-size: .9rem;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .easter {
+      display: inline-grid;
+      place-items: center;
+      min-width: 44px;
+      min-height: 44px;
+      padding: 6px;
+      border-radius: 12px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: background .25s ease, border-color .25s ease;
+    }
+
+    .easter:hover {
+      background: rgba(255,255,255,.05);
+      border-color: var(--line);
+    }
+
+    .hidden-details {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .memory-count {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--gold);
+      font-size: .78rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .footer {
+      padding: 60px 20px 90px;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer .infinity {
+      font-family: var(--serif);
+      font-size: 3rem;
+      color: var(--gold);
+    }
+
+    @media (min-width: 700px) {
+      .section { padding: 110px 40px; }
+
+      .kiss-card {
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+      }
+
+      .travel-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .polaroid .photo-placeholder { min-height: 190px; }
+
+      .letter { padding: 52px 58px; }
+
+      .photo-placeholder { min-height: 360px; }
+    }
+
+    @media (min-width: 1000px) {
+      .section { padding-top: 130px; padding-bottom: 130px; }
+      .story-card { padding: 42px; }
+      .mapline { min-height: 410px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body class="">
+  <div class="stars" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="progress" id="progress"></div>
+
+  <!-- ============================================================
+       MUSIC
+       
+       ============================================================ -->
+  <audio id="ourMusic" preload="none"></audio>
+
+  <button class="music-control" id="musicControl" aria-label="Play or pause our song" title="Music">
+    🎵
+  </button>
+
+  <main>
+    <!-- OPENING -->
+    <section class="section opening" id="opening">
+      <div class="container opening-inner">
+        <button class="alien-orb easter" data-toast="Alien detected. 👽" aria-label="Alien">
+          👽
+        </button>
+        <div class="eyebrow">A little world made by DoN</div>
+        <h1>DoN × Alien</h1>
+        <div class="date">September 2019 → ∞</div>
+        <div class="date">२०७६ भदौ  → ∞</div>
+        <p class="hint">I made something for you.<br>It might take a few minutes.<br>But you've given me years.</p>
+        <p class="hint">गीत सुन्नको लागि तल दाहिने तिर भएको music icon click गर्नुहोस <br>Dhanyabaad😂</p>
+        <button class="btn primary" id="enterStory">Enter our story →</button>
+        <div class="scroll-cue">Start where everything got complicated ↓</div>
+      </div>
+    </section>
+
+    <!-- SEPTEMBER 2019 -->
+    <section class="section chapter" id="september">
+      <div class="container">
+        <div class="eyebrow">September 2019</div>
+        <h2>Before “us” was us.</h2>
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <h3>Same college.</h3>
+            <p>Different sections.</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>Same bus.</h3>
+            <p>Different seats. 😂</p>
+          </article>
+          <article class="timeline-item reveal">
+            <h3>Same colony.</h3>
+            <p>About two minutes apart.</p>
+          </article>
+        </div>
+        <div class="story-card reveal" style="margin-top:42px;">
+          <div class="eyebrow">The weirdly important part</div>
+          <p class="lead">We were already living ridiculously close to each other. We just hadn't realized how much that little two-minute distance was about to matter.</p>
+          <button class="easter" data-toast="2 minutes apart once. Still close at heart. ❤️" aria-label="Two minutes">2 min</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUS STOP STORY -->
+    <section class="section chapter" id="bus-story">
+      <div class="container">
+        <div class="eyebrow">The bus-stop incident</div>
+        <h2>Then you got off the bus.</h2>
+        <p class="lead">And for some reason, I decided to follow you toward home.</p>
+
+        <div class="bus-scene" id="busScene" aria-label="Animated bus story">
+          <div class="scene-copy">
+            <div class="scene-line" id="scene1">She got off the bus.</div>
+            <div class="scene-line" id="scene2">DoN noticed.</div>
+            <div class="scene-line" id="scene3">He followed.</div>
+            <div class="scene-line" id="scene4">She noticed.</div>
+            <div class="scene-line" id="scene5">And apparently...</div>
+            <div class="scene-line" id="scene6">she walked slower.</div>
+            <div class="catch-line" id="scene7">Caught you, Alien. 👀😂</div>
+          </div>
+          <div class="bus" aria-hidden="true">
+            <span class="wheel one"></span>
+            <span class="wheel two"></span>
+          </div>
+          <div class="walkers" aria-hidden="true">
+            <span class="person">👽</span>
+            <span class="person">🚶</span>
+          </div>
+          <div class="bus-road"></div>
+          <div class="bus-stop"></div>
+        </div>
+
+        <div class="story-card reveal" style="margin-top:24px;">
+          <p class="lead center">Maybe that was the moment the universe quietly decided we were going to become a problem for each other. 😂❤️</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FIRST KISS -->
+    <section class="section chapter" id="kiss">
+      <div class="container">
+        <div class="eyebrow">And then...</div>
+        <h2>Apparently we didn't believe in taking things slowly.</h2>
+
+        <div class="story-card kiss-card reveal">
+          <div class="kiss-icons" aria-hidden="true">
+            <div class="icon-pill">🚲</div>
+            <div class="icon-pill">👽</div>
+            <div class="icon-pill">❤️</div>
+          </div>
+          <div>
+            <p>A bicycle ride.</p>
+            <p>A meeting.</p>
+            <p>And our first kiss💋, within the first week.</p>
+            <p class="small">Sep-12, 2019  outside “bhootiya ghar” 🤣</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COFFEE VS TEA -->
+    <section class="section chapter" id="debate">
+      <div class="container">
+        <div class="eyebrow">A serious relationship issue</div>
+        <h2>The Great Relationship Debate.</h2>
+        <p class="lead">One likes coffee. One likes tea. Naturally, this almost ended everything.</p>
+
+        <div class="debate reveal">
+          <button class="choice" data-choice="coffee">
+            <span><span class="big">☕</span> Coffee<br><span class="who">Alien's choice</span></span>
+          </button>
+          <button class="choice" data-choice="tea">
+            <span><span class="big">🍵</span> Tea<br><span class="who">DoN's choice</span></span>
+          </button>
+        </div>
+        <div class="debate-result" id="debateResult">Choose wisely. This is important.</div>
+
+        <div class="story-card reveal" style="margin-top:30px;">
+          <p class="lead center">Different drinks.<br>Same person I want beside me.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOWERS -->
+    <section class="section chapter" id="flowers">
+      <div class="container">
+        <div class="eyebrow">A confession disguised as a joke</div>
+        <h2>There is one problem in this relationship.</h2>
+        <p class="lead">You love flowers. And I keep telling you duplicate flowers are better. 😂</p>
+
+        <div class="flower-stage reveal" id="flowerStage" aria-live="polite"></div>
+        <div class="flower-controls">
+          <button class="btn primary" id="pickFlower">Pick a flower 🌷</button>
+          <div class="reveal-note" id="flowerNote">Go on. Pick one.</div>
+        </div>
+
+        <div class="story-card reveal" style="margin-top:20px;">
+          <p>Real flowers don't last forever.</p>
+          <p>Maybe that's exactly what makes them beautiful.</p>
+          <p class="lead">And if I could, I'd give you a whole garden.</p>
+          <p class="small">P.S. I still owe you those flowers.</p>
+          <p class="small">नआउनु फुल लिएर यदि बगैचा तिम्रो छैन भने</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VANILLA / COLORS -->
+    <section class="section chapter" id="little-things">
+      <div class="container center">
+        <div class="eyebrow">The little things</div>
+        <h2>I remember more than I admit.</h2>
+        <p class="lead">Some details don't need their own chapter. They just need to be remembered.</p>
+
+        <div class="hidden-details reveal">
+          <button class="easter" data-toast="Vanilla. Obviously. 🍦 I remembered." aria-label="Vanilla ice cream">🍦</button>
+          <button class="easter" data-toast="Apparently black looks good on DoN. 🖤" aria-label="Black outfit">🖤</button>
+          <button class="easter" data-toast="And red looks dangerously good on Alien. ❤️" aria-label="Red">❤️</button>
+          <button class="easter" data-toast="Khub chaiyeko xa real flowers. 😂🌸" aria-label="Flower">🌷</button>
+          <button class="easter" data-toast="This bus changed everything. 🚌" aria-label="Bus">🚌</button>
+          <button class="easter" data-toast="The year DoN made one extremely good decision. 👀" aria-label="2019">2019</button>
+        </div>
+        <p class="small" style="margin-top:24px;">I won't explain all the secrets. You might have to click things. 👀</p>
+      </div>
+    </section>
+
+    <!-- POKHARA -->
+    <section class="section pokhara chapter" id="pokhara">
+      <div class="mountains" aria-hidden="true"></div>
+      <div class="lake" aria-hidden="true"></div>
+      <div class="container" style="position:relative;z-index:2;">
+        <div class="eyebrow">Our first trip</div>
+        <h2>Pokhara.</h2>
+        <p class="lead">One of those memories that feels quieter every time I remember it in the best way.</p>
+
+        <div class="story-card reveal" style="margin-top:32px;">
+          <!-- REPLACE THIS PLACEHOLDER WITH YOUR REAL POKHARA PHOTO -->
+          <div class="photo-placeholder">
+            <div>
+              <strong>❤️</strong>
+              <img src="./photos/pokhara.png" alt="Our Pokhara memory" style="max-width:100%;border-radius:6px;margin-top:12px;">
+              No stock couple photo pretending to be us.
+            </div>
+          </div>
+
+          <div class="travel-grid">
+            <div class="travel-box">
+              <div class="emoji">✈️</div>
+              <strong>Going there</strong>
+              <span>Plane.</span>
+            </div>
+            <div class="travel-box">
+              <div class="emoji">🚌</div>
+              <strong>Coming back</strong>
+              <span>Bus.</span>
+            </div>
+          </div>
+
+          <p class="center" style="margin-top:24px;">Because apparently one mode of transportation wasn't enough. 😂</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section chapter" id="gallery">
+      <div class="container">
+        <div class="eyebrow">The scrapbook</div>
+        <h2>30+ little pieces of us.</h2>
+        <p class="lead">These are placeholders for the real photos. Replace them with the memories that actually belong here.</p>
+
+        <div class="gallery reveal" id="galleryGrid">
+          <!--
+            PHOTO CUSTOMIZATION:
+            Replace the contents of each .photo-placeholder with:
+            <img src="photos/photo01.jpg" alt="Describe the memory">
+            The cards are clickable and open a lightbox.
+          -->
+        </div>
+        <div class="gallery-note">Tap a memory to make it bigger.</div>
+        <div class="center">
+          <span class="memory-count" id="memoryCount">36 memory placeholders</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISTANCE -->
+    <section class="section distance chapter" id="distance">
+      <div class="container">
+        <div class="eyebrow">The part I don't joke about</div>
+        <h2>Two minutes apart once.<br>Thousands of kilometres apart now.</h2>
+
+        <div class="mapline reveal">
+          <div class="country nepal">
+            <div class="flag">🇳🇵</div>
+            <strong>Nepal</strong>
+            <span class="small">where our story began</span>
+          </div>
+          <div class="route" aria-hidden="true"></div>
+          <div class="route-dot" aria-hidden="true"></div>
+          <div class="country canada">
+            <div class="flag">🇨🇦</div>
+            <strong>Canada</strong>
+            <span class="small">where DoN is now</span>
+          </div>
+        </div>
+
+        <div class="distance-copy">
+          <div class="distance-line reveal">
+            <strong>Once, I could just get on my bicycle and come see you.</strong>
+          </div>
+          <div class="distance-line reveal">
+            <strong>Now there is a whole country between us.</strong>
+          </div>
+          <div class="distance-line reveal">
+            <strong>And honestly... I hate that part.</strong>
+          </div>
+          <div class="distance-line reveal">
+            <strong>I miss the ordinary things.</strong>
+            <p>Sitting beside you.<br>Hearing you talk about random things.<br>Annoying you in person instead of through a screen. 😂</p>
+          </div>
+          <div class="distance-line reveal">
+            <strong>But distance hasn't changed what you are to me.</strong>
+            <p class="nepali">कहिले काहिँ तिमीलाई सम्झी एक्लै टोलाउँछु
+                              नजिक आइ माया पोख्न सक्दिन
+                              टाडैबाट मेरी माया भनि हासेर बोलाउँछु 
+                              तर झर्न लागेका आँसुलाइ रोक्न सक्दिन  ❤️</p>
+            <p>You're still my Alien.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="section chapter" id="letter">
+      <div class="container">
+        <div class="eyebrow">What DoN doesn't say enough</div>
+        <h2>So I'll try to say it properly.</h2>
+
+        <div class="letter-wrap reveal">
+          <article class="letter">
+            <p>पिर्य Doraemon/ Alien,</p>
+
+            <p>I'm not very good at saying feelings out loud. You already know that. I'm much better at teasing you, making fun of you, annoying you, and acting like everything is a joke.</p>
+
+            <p>But sometimes I stop and think about how weird and funny our story actually is.</p>
+
+            <p>Same college. Different sections. Same bus. Different seats. Same colony. And somehow only about two minutes walking distance apart.</p>
+
+            <p>Then one evening you got off the bus. I noticed you, went after you, and followed you toward home. You noticed. And instead of walking normally, you walked slower.</p>
+
+            <p>I still think that's one of the funniest and cutest things about us. You basically made it easier for me and pretended you didn't. 😂</p>
+
+            <p>Then somehow, within the first week, we had our first kiss. A bicycle, a meeting, and suddenly our story had officially started.</p>
+
+            <p>And then came Pokhara. We flew there and came back by bus, because apparently we had to experience every possible form of transportation together.</p>
+
+            <p>You love flowers. I keep telling you duplicate flowers are better. I know that's not exactly the romantic answer you were hoping for. 😂 But I still owe you real flowers.</p>
+
+            <p>You drink coffee. I drink tea. You like vanilla ice cream. You like black outfits on me, and somehow red looks dangerously good on you.</p>
+
+            <p>These are tiny things. But I remember them. Maybe I don't say that enough.</p>
+
+            <p>The hardest part now is that we went from being two minutes apart to being thousands of kilometres apart. Nepal to Canada is a much longer walk than that old bus stop.</p>
+
+            <p>I miss the ordinary moments more than anything. Just being beside you. Going somewhere without needing a plan. Hearing you talk about random things. Annoying you without a phone between us.</p>
+
+            <p>I don't always say it properly, but I care about you deeply. I love you. And even after all these years, I still want a future with you.</p>
+
+            <p>Our story wasn't perfect or carefully planned. It was a bus ride, a slow walk, a bicycle, a first kiss, a trip to Pokhara, a lot of laughing, a lot of teasing, and now a lot of distance.</p>
+
+            <p>But somehow, it's still us.</p>
+
+            <p>And if I had to choose all over again...</p>
+
+            <p><strong>I'd still follow you home from that bus stop. Every single time.</strong></p>
+
+            <p class="sign">2019 → ∞<br>Forever your annoying Mr. DoN. ❤️</p>
+
+            <p><strong>P.S.</strong> I still owe you those real flowers.<br>Don't get excited.<br>Maybe I'll just buy duplicate ones. 😂🌷</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL SURPRISE -->
+    <section class="section last-thing" id="last">
+      <div class="container center">
+        <div class="eyebrow">Before you go</div>
+        <div class="tiny">One last thing.</div>
+        <button class="btn primary" id="openFinal">Open it ❤️</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="infinity">2019 → ∞</div>
+    <p>Two minutes apart once. Thousands of kilometres apart now. Still my Alien. 👽❤️</p>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Memory viewer">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close memory">✕</button>
+    <div class="lightbox-card" id="lightboxCard"></div>
+  </div>
+
+  <!-- FINAL CINEMATIC REVEAL -->
+  <div class="final-overlay" id="finalOverlay" role="dialog" aria-modal="true" aria-label="Final message">
+    <button class="close-final" id="closeFinal" aria-label="Close final message">✕</button>
+    <div class="final-content">
+      <div class="final-line" data-delay="0">September 2019.</div>
+      <div class="final-line" data-delay="1">I followed you home.</div>
+      <div class="final-line" data-delay="2">You walked slower.</div>
+      <div class="final-line" data-delay="3">We met.</div>
+      <div class="final-line" data-delay="4">We kissed.</div>
+      <div class="final-line" data-delay="5">We travelled.</div>
+      <div class="final-line" data-delay="6">We laughed.</div>
+      <div class="final-line" data-delay="7">We missed each other.</div>
+      <div class="final-line" data-delay="8">We grew up.</div>
+      <div class="final-line" data-delay="9">And somehow...</div>
+      <div class="final-line big" data-delay="10">We're still here.</div>
+      <div class="final-infinity" data-delay="11">2019 → ∞</div>
+      <div class="final-sign" data-delay="12">Happy years with you, my Alien. 👽❤️<br>— Mr. DoN</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* ============================================================
+       EASY CUSTOMIZATION
+       ============================================================ */
+
+    // ================================
+    // ADD YOUR REAL PHOTOS HERE
+    // ================================
+    //
+    // Replace a placeholder card in the generated gallery below
+    // with an <img> tag such as:
+    //
+    // <img src="photos/photo01.jpg" alt="Our memory">
+    //
+    // Keep the HTML file and "photos" folder in the same directory.
+    // The site does NOT need a server.
+    // ================================
+
+    // MUSIC:
+    // Add your legally obtained copy of the song beside index.html,
+    // then change this filename to match it.
+    const MUSIC_FILE = "our-song.mp3"; // Example: "our-song.mp3"
+
+    const music = document.getElementById("ourMusic");
+    const musicControl = document.getElementById("musicControl");
+
+    if (MUSIC_FILE) music.src = MUSIC_FILE;
+
+    /* -----------------------------
+       Helpers
+       ----------------------------- */
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    function showToast(message) {
+      const toast = $("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    /* -----------------------------
+       Opening navigation
+       ----------------------------- */
+    $("#enterStory").addEventListener("click", () => {
+      document.body.classList.remove("locked");
+      $("#september").scrollIntoView({ behavior: "smooth" });
+    });
+
+    /* -----------------------------
+       Scroll progress
+       ----------------------------- */
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      $("#progress").style.width = progress + "%";
+    }
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    /* -----------------------------
+       Reveal animations
+       ----------------------------- */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    $$(".reveal").forEach(el => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(22px)";
+      el.style.transition = "opacity .8s ease, transform .8s ease";
+      revealObserver.observe(el);
+    });
+
+    /* -----------------------------
+       Bus story
+       ----------------------------- */
+    const sceneLines = [1,2,3,4,5,6,7].map(n => $("#scene" + n));
+
+    const busObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        sceneLines.forEach((line, index) => {
+          setTimeout(() => line.classList.add("visible"), index * 850);
+        });
+
+        busObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.35 });
+
+    busObserver.observe($("#busScene"));
+
+    /* -----------------------------
+       Coffee vs Tea
+       ----------------------------- */
+    $$(".choice").forEach(button => {
+      button.addEventListener("click", () => {
+        const result = $("#debateResult");
+        if (button.dataset.choice === "coffee") {
+          result.textContent = "Correct. Alien fuel. ☕❤️";
+        } else {
+          result.textContent = "DoN has entered the chat. 🍵😂";
+        }
+      });
+    });
+
+    /* -----------------------------
+       Flower interaction
+       ----------------------------- */
+    const flowerStage = $("#flowerStage");
+    const flowerNote = $("#flowerNote");
+    const flowerTypes = ["🌷", "🌸", "🌹", "🌺", "💐"];
+    let flowerCount = 0;
+
+    $("#pickFlower").addEventListener("click", () => {
+      flowerCount++;
+
+      const flower = document.createElement("span");
+      flower.className = "flower";
+      flower.textContent = flowerTypes[(flowerCount - 1) % flowerTypes.length];
+
+      // Deterministic, pleasantly scattered positions.
+      const left = 6 + ((flowerCount * 29) % 88);
+      const rotation = ((flowerCount * 17) % 25) - 12;
+      const scale = .82 + ((flowerCount * 13) % 34) / 100;
+
+      flower.style.left = left + "%";
+      flower.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+      flowerStage.appendChild(flower);
+
+      if (flowerCount < 4) {
+        flowerNote.textContent = "Okay... keep going. 🌸";
+      } else if (flowerCount < 8) {
+        flowerNote.textContent = "Fine. That's becoming a whole garden. 😂";
+      } else if (flowerCount < 12) {
+        flowerNote.textContent = "Okay... maybe I was wrong.";
+      }  else if (flowerCount < 16) {
+        flowerNote.textContent = "भयो धेरै भयो अब मत्तिनी हैन धेरै🙄";
+      } else {
+        flowerNote.textContent = "Real flowers don't last forever. Maybe that's exactly what makes them beautiful. ❤️";
+      }
+    });
+
+    /* -----------------------------
+       Easter eggs
+       ----------------------------- */
+    $$("[data-toast]").forEach(el => {
+      el.addEventListener("click", () => showToast(el.dataset.toast));
+    });
+
+    /* -----------------------------
+       Gallery / Polaroid scrapbook
+       ----------------------------- */
+    const memories = [
+      ["Our memory ❤️", "photo01.jpg"],
+      ["Look at us 😂", "photo02.png"],
+      ["This day.", "photo03.jpg"],
+      ["Still my favorite.", "photo04.jpg"],
+      ["We were cute here.", "photo05.jpg"],
+      ["Definitely not annoying each other.", "photo06.jpg"],
+      ["One more memory.", "photo07.jpg"],
+      ["This one matters.", "photo08.jpg"],
+      ["Us, apparently.", "photo09.jpg"],
+      ["Another little moment.", "photo10.jpg"],
+      ["That smile.", "photo11.jpg"],
+      ["Still us.", "photo12.jpg"],
+      ["A good day.", "photo13.jpg"],
+      ["Caught being cute.", "photo14.jpg"],
+      ["No comment. 😂", "photo15.jpg"],
+      ["This memory.", "photo16.jpg"],
+      ["A little happiness.", "photo17.jpg"],
+      ["You + me.", "photo18.jpg"],
+      ["One for the scrapbook.", "photo19.jpg"],
+      ["Worth remembering.", "photo20.jpg"],
+      ["The two of us.", "photo21.jpg"],
+      ["This one stays.", "photo22.jpg"],
+      ["Another favorite.", "photo23.jpg"],
+      ["Look at that.", "photo24.jpg"],
+      ["A moment I kept.", "photo25.jpg"],
+      ["Home, somehow.", "photo26.jpg"],
+      ["Still smiling.", "photo27.jpg"],
+      ["One more.", "photo28.jpg"],
+      ["Us again. ❤️", "photo29.jpg"],
+      ["A memory for later.", "photo30.jpg"],
+      ["This day mattered.", "photo31.jpg"],
+      ["One of many.", "photo32.jpg"],
+      ["Never deleting this one.", "photo33.jpg"],
+      ["Another chapter.", "photo34.jpg"],
+      ["Almost 36 already.", "photo35.jpg"],
+      ["And one more for us.", "photo36.jpg"]
+    ];
+
+    const rotations = [-3.2, 2.1, -1.4, 3.7, -2.2, 1.1, -4, 2.8];
+    const gallery = $("#galleryGrid");
+
+    memories.forEach((memory, index) => {
+  const card = document.createElement("article");
+
+  card.className = "polaroid";
+  card.tabIndex = 0;
+
+  card.style.setProperty(
+    "--rot",
+    rotations[index % rotations.length] + "deg"
+  );
+
+  card.innerHTML = `
+    <div class="photo">
+      <img 
+        src="photos/${memory[1]}" 
+        alt="${memory[0]}"
+        loading="lazy"
+      >
+    </div>
+
+    <div class="caption">
+      ${memory[0]}
+    </div>
+  `;
+
+  const open = () => openLightbox(memory);
+
+  card.addEventListener("click", open);
+
+  card.addEventListener("keydown", e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      open();
+    }
+  });
+
+  gallery.appendChild(card);
+});
+
+
+
+
+
+    /* -----------------------------
+       Photo lightbox
+       ----------------------------- */
+    const lightbox = $("#lightbox");
+    const lightboxCard = $("#lightboxCard");
+
+    function openLightbox(memory) {
+  lightboxCard.innerHTML = `
+    <div class="lightbox-photo">
+      <img 
+        src="photos/${memory[1]}" 
+        alt="${memory[0]}"
+      >
+    </div>
+
+    <div class="lightbox-caption">
+      ${memory[0]}
+    </div>
+  `;
+
+  lightbox.classList.add("active");
+  document.body.classList.add("locked");
+}
+
+/* CLOSE LIGHTBOX */ function closeLightbox() { lightbox.classList.remove("active"); document.body.classList.remove("locked"); } /* Close button */ $("#lightboxClose").addEventListener("click", function(e) { e.preventDefault(); e.stopPropagation(); closeLightbox(); }); /* Click outside the image to close */ lightbox.addEventListener("click", function(e) { if (e.target === lightbox) { closeLightbox(); } }); /* Press Escape to close */ document.addEventListener("keydown", function(e) { if (e.key === "Escape" && lightbox.classList.contains("active")) { closeLightbox(); } });
+
+    $("#lightboxClose").addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    /* -----------------------------
+       Music
+       ----------------------------- */
+    async function toggleMusic() {
+      if (!MUSIC_FILE) {
+        showToast('Add your song as "our-song.mp3" and set MUSIC_FILE in the code. 🎵');
+        return;
+      }
+
+      try {
+        if (music.paused) {
+          await music.play();
+          musicControl.classList.add("playing");
+          musicControl.textContent = "⏸️";
+        } else {
+          music.pause();
+          musicControl.classList.remove("playing");
+          musicControl.textContent = "🎵";
+        }
+      } catch (err) {
+        showToast("Tap again after adding the local music file. 🎵");
+      }
+    }
+
+    musicControl.addEventListener("click", toggleMusic);
+
+    /* -----------------------------
+       Final cinematic reveal
+       ----------------------------- */
+    const finalOverlay = $("#finalOverlay");
+    let finalTimers = [];
+
+    function clearFinalTimers() {
+      finalTimers.forEach(clearTimeout);
+      finalTimers = [];
+    }
+
+    function openFinal() {
+      clearFinalTimers();
+      finalOverlay.classList.add("active");
+      document.body.classList.add("locked");
+
+      const lines = $$(".final-line", finalOverlay);
+      const infinity = $(".final-infinity", finalOverlay);
+      const sign = $(".final-sign", finalOverlay);
+
+      lines.forEach(line => line.classList.remove("show"));
+      infinity.classList.remove("show");
+      sign.classList.remove("show");
+
+      lines.forEach((line, index) => {
+        finalTimers.push(setTimeout(() => {
+          line.classList.add("show");
+        }, 850 + index * 920));
+      });
+
+      finalTimers.push(setTimeout(() => {
+        infinity.classList.add("show");
+      }, 850 + 11 * 920));
+
+      finalTimers.push(setTimeout(() => {
+        sign.classList.add("show");
+      }, 850 + 12 * 920));
+    }
+
+    function closeFinal() {
+      clearFinalTimers();
+      finalOverlay.classList.remove("active");
+      document.body.classList.remove("locked");
+    }
+
+    $("#openFinal").addEventListener("click", openFinal);
+    $("#closeFinal").addEventListener("click", closeFinal);
+
+    /* -----------------------------
+       Keyboard accessibility
+       ----------------------------- */
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        if (finalOverlay.classList.contains("active")) closeFinal();
+        else if (lightbox.classList.contains("active")) closeLightbox();
+      }
+    });
+
+    /* -----------------------------
+       Small vanilla-ice-cream Easter egg:
+       clicking the ice cream naturally uses data-toast.
+       Additional hidden DoN name Easter egg.
+       ----------------------------- */
+    const donTriggers = $$("[data-don-trigger]");
+    donTriggers.forEach(el => {
+      el.addEventListener("click", () => showToast("Professional Alien annoyer since September 2019. 😂"));
+    });
+
+    // Make the title in the footer a subtle DoN Easter egg.
+    const footerInfinity = $(".footer .infinity");
+    footerInfinity.setAttribute("role", "button");
+    footerInfinity.setAttribute("tabindex", "0");
+    footerInfinity.style.cursor = "pointer";
+    footerInfinity.addEventListener("click", () => showToast("Professional Alien annoyer since September 2019. 😂"));
+    footerInfinity.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        showToast("Professional Alien annoyer since September 2019. 😂");
+      }
+    });
+  </script>
+</body>
+</html>
